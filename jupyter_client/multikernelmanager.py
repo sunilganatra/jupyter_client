@@ -91,6 +91,10 @@ class MultiKernelManager(LoggingConfigurable):
         The kernel ID for the newly started kernel is returned.
         """
         kernel_id = kwargs.pop('kernel_id', unicode_type(uuid.uuid4()))
+        for ele in kwargs:
+            if ele == "env":
+                 data = kwargs[ele]
+                 kernel_id = data['KERNEL_kernel_id']
         if kernel_id in self:
             raise DuplicateKernelError('Kernel already exists: %s' % kernel_id)
 
